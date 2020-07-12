@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react"
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import TableListContainer from "./containers/TableListContainer"
+import TableViewerContainer from "./containers/TableViewerContainer"
+import { Callout } from "@blueprintjs/core"
 
+// Mostly just sets up our routes.
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Router>
+      <Switch>
+        <Route path="/" exact>
+          <TableListContainer />
+        </Route>
+        <Route path="/error" exact>
+          <Callout intent="danger">Server error, try again later.</Callout>
+        </Route>
+        <Route path="/table/:tableName" exact>
+          <TableViewerContainer />
+        </Route>
+      </Switch>
+    </Router>
+  )
 }
 
-export default App;
+export default App
